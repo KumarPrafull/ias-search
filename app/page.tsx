@@ -13,7 +13,7 @@ export default function Home() {
         The IAS exam is known for its low success rate, with thousands of candidates competing for a limited number of vacancies. However, with the right preparation, dedication, and perseverance, aspirants can achieve their dream of becoming an IAS officer. Many coaching institutes and online platforms offer guidance and resources to help candidates prepare effectively for the exam.
       </p>
       <h2 className="text-2xl font-semibold mt-8 mb-4">
-        Know Successful IAS Officer's strategy, optional subjects, numbers and preparation tips
+        Know Successful IAS Officer&apos;s strategy, optional subjects, numbers and preparation tips
       </h2>
       <input 
         type="text"
