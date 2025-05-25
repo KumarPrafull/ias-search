@@ -38,8 +38,9 @@ export default function CreateProfile() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className='font-black'>Add Successful UPSC Candidates</h1>
+    <div className="flex flex-col lg:flex-row justify-center gap-6 p-6">
+      <div className='w-full lg:w-1/3 bg-gray-100 p-4 rounded shadow'>
+      <h1 className='font-black text-2xl'>Add IAS/IPS Officers</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-2 m-10'>
         <input
           className="border border-gray-300 p-2 rounded mb-4"
@@ -86,7 +87,7 @@ export default function CreateProfile() {
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add Item</button>
       </form>
-
+</div>
       <ul>
         {items.map((item: { name: string, _id: string, description: string, rank: string, service: string, batch: string }) => (
           <li className='py-2' key={item._id}>
