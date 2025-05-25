@@ -215,7 +215,7 @@ export async function generateStaticParams() {
     (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
     "http://localhost:3000";
 
-  const apiUrl = `${base}/api/items`;
+  const apiUrl = `${base}/api/ids`;
 
   const response = await fetch(apiUrl, { cache: "force-cache" });
   const { data } = await response.json();
