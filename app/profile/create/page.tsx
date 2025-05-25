@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 export default function CreateProfile() {
@@ -37,56 +38,65 @@ export default function CreateProfile() {
   };
 
   return (
-    <div>
-      <h1>Items</h1>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className='font-black'>Add Successful UPSC Candidates</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-2 m-10'>
         <input
+          className="border border-gray-300 p-2 rounded mb-4"
           name="name"
           placeholder="Name"
           value={form.name}
           onChange={handleChange}
         />
         <input
+          className="border border-gray-300 p-2 rounded mb-4"
           name="description"
           placeholder="Description"
           value={form.description}
           onChange={handleChange}
         />
         <input
+          className="border border-gray-300 p-2 rounded mb-4"
           name="service"
           placeholder="Service"
           value={form.service}
           onChange={handleChange}
         />
         <input
+          className="border border-gray-300 p-2 rounded mb-4"
           name="batch"
           placeholder="Batch Year"
           value={form.batch}
           onChange={handleChange}
         />
         <input
+          className="border border-gray-300 p-2 rounded mb-4"
           name="rank"
           placeholder="Rank"
           value={form.rank}
           onChange={handleChange}
         />
         <input
+          className="border border-gray-300 p-2 rounded mb-4"
           name="article_url"
           placeholder="Article URL"
           value={form.article_url}
           onChange={handleChange}
         />
 
-        <button type="submit">Add Item</button>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Add Item</button>
       </form>
 
       <ul>
-        {items.map((item: {name: string, _id: string, description: string, rank: string, service: string, batch: string}) => (
-          <li key={item._id}>
-            {item.name} - {item.description}
-            <br />
-            Service: {item.service} | Batch: {item.batch} | Rank: {item.rank}
-            <br />
+        {items.map((item: { name: string, _id: string, description: string, rank: string, service: string, batch: string }) => (
+          <li className='py-2' key={item._id}>
+            <Link href={`/profile/${item._id}`} className='text-blue-500 hover:underline'>
+            <span className='font-semibold'>{item.name}</span> 
+            - {item.service.toUpperCase()} | 
+            Batch: {item.batch} | 
+            Rank: {item.rank} |
+            {item.description}
+            </Link>
           </li>
         ))}
       </ul>

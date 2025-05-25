@@ -1,35 +1,30 @@
-type Params = Promise<{ slug: string[] }>
+type Params = Promise<{ slug: string }>;
 
-export default async function Home({params} : {params : Params}) {
+export default async function ProfilePage({ params }: { params: Params }) {
     const { slug } = await params;;
+    console.log("ProfilePage slug:", slug);
 
-    const base =
-    process.env.NEXT_PUBLIC_SITE_URL || // Use your deployed domain in production
-    process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}` ||
-    'http://localhost:3000'; // fallback for local dev
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
+    'http://localhost:3000';
 
-  // Construct absolute URL for SSR fetch
+  // Construct absolute URL for SSR fetch (at build time)
   const apiUrl = `${base}/api/items?id=${slug}`;
-    const fetchData = async () => {
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error("Failed to fetch officer data");
-        }
-        const data = await response.json();
-        return data.data[0];
-      } catch (error) {
-        console.error("Error fetching officer data:", error);
-      }
-    };
-  const data = await fetchData();
-  console.log("Officer Data:", data);
+
+  let data = null;
+  try {
+    const response = await fetch(apiUrl, { cache: 'force-cache' }); // Use 'force-cache' for SSG
+    if (!response.ok) throw new Error("Failed to fetch officer data");
+    const apiData = await response.json();
+    data = apiData.data?.[0] || null;
+  } catch (error) {
+    console.error("Error fetching officer data:", error);
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <div>
-        {data?.service}
-      </div>
+      <div>{data?.service}</div>
       <h1 className="text-3xl font-bold mb-4">
         {data?.name} ({data?.service})
       </h1>
@@ -42,14 +37,32 @@ export default async function Home({params} : {params : Params}) {
         Optional Subjects of {data?.name}:
       </h2>
       {/* <ul className="list-disc list-inside mb-4">
-        {data.optional_subjects.map((subject, i) => (
+        {data?.optional_subjects?.map((subject: string, i: number) => (
           <li key={i}>{subject}</li>
         ))}
       </ul> */}
       <div>Number of attempts: {data?.attempts}</div>
-      <div>
-        Rank: {data?.rank} ({data?.year})
-      </div>
+      <div>Rank: {data?.rank} ({data?.year})</div>
     </div>
   );
+}
+
+// /app/profile/[slug]/page.tsx
+
+export async function generateStaticParams() {
+  // Fetch all possible slugs from your API, DB, or a list
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
+    'http://localhost:3000';
+
+  const apiUrl = `${base}/api/items`; // Fetch all items
+
+  const response = await fetch(apiUrl, { cache: 'force-cache' });
+  const { data } = await response.json();
+
+  // Suppose each item has an `_id` you want to use as the slug
+  return data.map((item: {_id: string}) => ({
+    slug: item._id,
+  }));
 }

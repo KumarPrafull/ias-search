@@ -47,12 +47,11 @@ const Search = () => {
             <p>No officers found for &quot;{searchTerm}&quot;</p>
         )}
         {officers.length > 0 && (
-            <ul className="list-disc pl-5">
-                {officers.map((officer: { _id: string, name: string, service: string, batch: string, description: string }) => (
-                    <li key={officer._id} className="mb-2">
+            <ul className="list-disc pl-1">
+                {officers.map((officer: { _id: string, name: string, service: string, rank:string, batch: string, description: string }) => (
+                    <li key={officer._id} className="my-1 list-none">
                         <Link href={'profile/'+officer._id} className="text-blue-500 hover:underline">
-                        <strong>{officer.name}</strong> - {officer.service} ({officer.batch})<br />
-                        {officer.description}
+                        <strong>{officer.name}</strong> - {officer.service} {officer.batch} Rank {officer.rank} <span className="font-black">|</span> {officer.description}
                         </Link>
                     </li>
                 ))}
