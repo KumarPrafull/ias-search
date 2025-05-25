@@ -20,6 +20,7 @@ const Search = () => {
         setOfficers(data.data || []);
         setError("");
       } catch (err) {
+        console.error("Error fetching officers:", err);
         setError("Unable to fetch officers. Please try again.");
       } finally {
         setLoading(false);
