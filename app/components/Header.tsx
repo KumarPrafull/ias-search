@@ -25,6 +25,14 @@ const Header = () => {
             </li>
             <li>
               <Link
+                href="/toppers"
+                className="bg-blue-600 text-white px-4 py-1.5 rounded-xl font-semibold shadow hover:bg-purple-600 transition"
+              >
+                Toppers
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/profile/create"
                 className="bg-blue-600 text-white px-4 py-1.5 rounded-xl font-semibold shadow hover:bg-purple-600 transition"
               >
