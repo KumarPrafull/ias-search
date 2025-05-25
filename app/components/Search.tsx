@@ -1,6 +1,7 @@
 'use client';
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createSlug } from "../utils";
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -71,7 +72,7 @@ const Search = () => {
           {officers.map((officer: { _id: string, name: string, service: string, rank: string, batch: string, description: string }) => (
             <li key={officer._id} className="py-2">
               <Link
-                href={`/profile/${officer._id}`}
+                href={`/profile/${createSlug({name: officer.name, batch: officer.batch || "", rank: officer.rank || "", service: officer.service || "", _id: officer._id})}`}
                 className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 px-2 py-2 rounded-xl hover:bg-blue-50 group transition"
               >
                 <span className="font-semibold text-blue-800 group-hover:underline text-lg">{officer.name}</span>

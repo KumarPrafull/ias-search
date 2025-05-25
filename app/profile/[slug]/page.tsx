@@ -1,3 +1,4 @@
+import { createSlug } from "@/app/utils";
 import Link from "next/link";
 
 type Officer = {
@@ -61,13 +62,14 @@ type Params = Promise<{ slug: string }>;
 
 export default async function ProfilePage({ params }: { params: Params }) {
   const { slug } = await params;
+  const id = slug.split("-").pop(); // Extract the ID from the slug
 
   const base =
     process.env.NEXT_PUBLIC_SITE_URL ||
     (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
     "http://localhost:3000";
 
-  const apiUrl = `${base}/api/items?id=${slug}`;
+  const apiUrl = `${base}/api/items?id=${id}`;
 
   let data: Officer | null = null;
   try {
@@ -220,7 +222,7 @@ export async function generateStaticParams() {
   const response = await fetch(apiUrl, { cache: "force-cache" });
   const { data } = await response.json();
 
-  return data.map((item: { _id: string }) => ({
-    slug: item._id,
+  return data.map((item: { _id: string, name: string, service: string, batch: string, rank: string }) => ({
+    slug: createSlug({name: item.name, batch: item.batch, rank: item.rank, service: item.service, _id: item._id}),
   }));
 }

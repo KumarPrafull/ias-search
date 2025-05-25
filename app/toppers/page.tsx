@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { createSlug } from "../utils";
 
 // Reuse your type for Officer (adjust if your API structure differs)
 type Officer = {
@@ -6,6 +7,7 @@ type Officer = {
     name: string;
     service?: string;
     batch?: string;
+    rank?: string;
     optional_subject?: string;
     home_state?: string;
 };
@@ -61,14 +63,14 @@ export default async function ToppersPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {toppers.map((officer, i) => (
+                                    {toppers.map((officer) => (
                                         <tr
-                                            key={i}
+                                            key={officer._id}
                                             className="border-b hover:bg-blue-50 transition"
                                         >
                                             <td className="py-3 px-4 font-semibold text-blue-700">
                                                 <Link
-                                                    href={`/profile/${officer._id}`}
+                                                    href={`/profile/${createSlug({name: officer.name, batch: officer.batch || "", rank: officer.rank || "", service: officer.service || "", _id: officer._id})}`}
                                                     className="hover:underline"
                                                 >
                                                     {officer.name}

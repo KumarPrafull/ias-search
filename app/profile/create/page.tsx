@@ -1,4 +1,5 @@
 'use client';
+import { createSlug } from '@/app/utils';
 import Link from 'next/link';
 import { useState, useCallback, useEffect } from 'react';
 
@@ -165,7 +166,7 @@ export default function CreateProfile() {
                 {items.map(item => (
                   <li className="py-2 border-b border-blue-50 last:border-b-0" key={item._id}>
                     <Link
-                      href={`/profile/${item._id}`}
+                      href={`/profile/${createSlug({name: item.name, batch: item.batch || "", rank: item.rank || "", service: item.service || "", _id: item._id})}`}
                       className="text-blue-700 font-semibold hover:underline hover:text-purple-700 transition"
                     >
                       {item.name}
