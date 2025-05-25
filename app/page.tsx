@@ -1,3 +1,5 @@
+import Search from "./components/Search";
+
 export default function Home() {
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -15,11 +17,7 @@ export default function Home() {
       <h2 className="text-2xl font-semibold mt-8 mb-4">
         Know Successful IAS Officer&apos;s strategy, optional subjects, numbers and preparation tips
       </h2>
-      <input 
-        type="text"
-        placeholder="Search IAS Officer"
-        className="border border-gray-300 rounded p-2 w-full mb-4"
-      />
+      <Search />
     </div>
   );
 }

@@ -1,4 +1,8 @@
-export default async function Page() {
+type Params = Promise<{ slug: string[] }>
+
+export default async function Home({params} : {params : Params}) {
+    const { slug } = await params;
+    console.log('Slug:', slug);
   const data = {
     name: 'John Doe',
     service: 'IAS',
