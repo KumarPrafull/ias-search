@@ -8,7 +8,7 @@ const Header = () => {
         <Link href="/" className="flex items-center gap-2 group">
           <span className="inline-block w-2 h-8 bg-gradient-to-b from-blue-600 to-purple-400 rounded-full mr-2 group-hover:scale-y-110 transition" />
           <span className="text-2xl font-extrabold text-blue-700 tracking-tight group-hover:text-purple-700 transition">
-            IAS Guide
+            IAS
           </span>
         </Link>
 
