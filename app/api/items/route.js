@@ -1,17 +1,24 @@
 import { NextResponse } from 'next/server'
-import dbConnect from '../../lib/mongodb'  // adjust import if path is different
+import dbConnect from '../../lib/mongodb'
 import Item from '../../models/item'
 
-export const dynamic = 'force-static' // If you want static rendering
+// No need for export const dynamic = 'force-static' here
 
-export async function GET() {
+export async function GET(request) {
   await dbConnect();
+  // Use Next.js native nextUrl to safely extract query parameters
+  const { searchParams } = request.nextUrl;
+  console.log("url searchParams:", searchParams);
+  const id = searchParams.get('id');
+
+  console.log('GET request received with id:', id);
+
   try {
-    const items = await Item.find({});
+    const items = await Item.find(id ? { _id: id } : {});
     return NextResponse.json({ success: true, data: items }, { status: 200 });
   } catch (error) {
     console.error('GET error:', error);
-    return NextResponse.json({ success: false }, { status: 400 });
+    return NextResponse.json({ success: false, error: error.message }, { status: 400 });
   }
 }
 

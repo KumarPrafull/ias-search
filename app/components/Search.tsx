@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Search = () => {
@@ -49,8 +50,10 @@ const Search = () => {
             <ul className="list-disc pl-5">
                 {officers.map((officer: { _id: string, name: string, service: string, batch: string, description: string }) => (
                     <li key={officer._id} className="mb-2">
+                        <Link href={'profile/'+officer._id} className="text-blue-500 hover:underline">
                         <strong>{officer.name}</strong> - {officer.service} ({officer.batch})<br />
                         {officer.description}
+                        </Link>
                     </li>
                 ))}
             </ul>
