@@ -34,24 +34,17 @@ export default async function ProfilePage({ params }: { params: Params }) {
       <div className="mb-2">Father&apos;s Name: {data?.father}</div>
       <div className="mb-2">Father&apos;s Occupation: {data?.father_occupation}</div>
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        Optional Subjects of {data?.name}:
+        Optional Subjects of {data?.name}: {}{data?.optional_subject || 'Not specified'}
       </h2>
-      {/* <ul className="list-disc list-inside mb-4">
-        {data?.optional_subjects?.map((subject: string, i: number) => (
-          <li key={i}>{subject}</li>
-        ))}
-      </ul> */}
       <div>Number of attempts: {data?.attempts}</div>
       <div>Rank: {data?.rank} ({data?.batch})</div>
       <div><a href={data?.article_url}>Read story of {data?.name}</a></div>
-      <Link href={`/profile/edit/${data?._id}`} className="text-blue-500 hover:underline mt-4 inline-block">
+      <Link href={`/profile/${data?._id}/edit`} className="text-blue-500 hover:underline mt-4 inline-block">
         Edit
       </Link>
     </div>
   );
 }
-
-// /app/profile/[slug]/page.tsx
 
 export async function generateStaticParams() {
   // Fetch all possible slugs from your API, DB, or a list
