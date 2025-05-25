@@ -31,10 +31,10 @@ export default async function ProfilePage({ params }: { params: Params }) {
         {data?.batch ? ` (${data?.batch} Batch)` : ''}
       </h1>
       <p className="mb-4">{data?.description}</p>
-      <div className="mb-2">Father&apos;s Name: {data?.father}</div>
+      <div className="mb-2">Father&apos;s Name: {data?.father_name}</div>
       <div className="mb-2">Father&apos;s Occupation: {data?.father_occupation}</div>
       <h2 className="text-xl font-semibold mt-6 mb-2">
-        Optional Subjects of {data?.name}: {}{data?.optional_subject || 'Not specified'}
+        Optional Subjects of {data?.name}: {}{data?.optional_subject || 'Not available'}
       </h2>
       <div>Number of attempts: {data?.attempts}</div>
       <div>Rank: {data?.rank} ({data?.batch})</div>
