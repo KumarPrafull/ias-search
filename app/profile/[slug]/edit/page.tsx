@@ -48,9 +48,14 @@ const emptyForm = {
 type ProfileForm = typeof emptyForm;
 type Params = Promise<{ slug: string }>;
 
+const textareaFields: (keyof ProfileForm)[] = [
+  "description", "achievements", "struggles", "work_experience", "hobbies"
+];
+
 export default function EditProfilePage({ params }: { params: Params }) {
   const [slug, setSlug] = useState<string | null>(null);
   const [form, setForm] = useState<ProfileForm>({ ...emptyForm });
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -64,11 +69,12 @@ export default function EditProfilePage({ params }: { params: Params }) {
         ...emptyForm,
         ...data
       });
+      setLoading(false);
     }
     fetchProfile();
   }, [params]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -83,30 +89,48 @@ export default function EditProfilePage({ params }: { params: Params }) {
     router.push(`/profile/${slug}`);
   };
 
-  if (!slug) return <div>Loading...</div>;
+  if (loading || !slug) return (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <span className="text-lg text-blue-600 font-semibold animate-pulse">Loading...</span>
+    </div>
+  );
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center gap-6 p-6">
-      <div className='flex-1 w-full lg:w-1/3 bg-gray-100 p-4 rounded shadow'>
-        <h1 className='font-black text-2xl'>Edit IAS/IPS Officer</h1>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-2 m-10'>
-          {Object.entries(emptyForm).map(([key]) => (
-            <input
-              key={key}
-              className="border border-gray-300 p-2 rounded mb-4"
-              name={key}
-              placeholder={key.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
-              value={form[key as keyof ProfileForm] ?? ""}
-              onChange={handleChange}
-            />
-          ))}
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            Save Changes
-          </button>
-        </form>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-10 px-2">
+      <div className="max-w-3xl mx-auto">
+        <div className='bg-white rounded-3xl shadow-lg border border-blue-100 px-8 py-10'>
+          <h1 className='font-extrabold text-2xl mb-6 text-blue-800'>Edit IAS/IPS Officer</h1>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
+            {Object.entries(emptyForm).map(([key]) =>
+              textareaFields.includes(key as keyof ProfileForm) ? (
+                <textarea
+                  key={key}
+                  className="border border-gray-300 p-2 rounded-xl mb-2 focus:outline-blue-400 transition"
+                  name={key}
+                  placeholder={key.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
+                  value={form[key as keyof ProfileForm] ?? ""}
+                  onChange={handleChange}
+                  rows={3}
+                />
+              ) : (
+                <input
+                  key={key}
+                  className="border border-gray-300 p-2 rounded-xl mb-2 focus:outline-blue-400 transition"
+                  name={key}
+                  placeholder={key.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
+                  value={form[key as keyof ProfileForm] ?? ""}
+                  onChange={handleChange}
+                />
+              )
+            )}
+            <button
+              className="bg-blue-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-xl mt-3 shadow transition"
+              type="submit"
+            >
+              Save Changes
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

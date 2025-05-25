@@ -106,57 +106,82 @@ export default function CreateProfile() {
     setSubmitting(false);
   };
 
-  // Fields that should be textarea (for better UX)
   const textareaFields: (keyof FormType)[] = [
     "description", "achievements", "struggles", "work_experience", "hobbies"
   ];
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center gap-6 p-6">
-      <div className='flex-1 w-full lg:w-1/3 bg-gray-100 p-4 rounded shadow'>
-        <h1 className='font-black text-2xl'>Add IAS/IPS Officers</h1>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-2 m-10'>
-          {fields.map(field =>
-            textareaFields.includes(field) ? (
-              <textarea
-                key={field}
-                className="border border-gray-300 p-2 rounded mb-4"
-                name={field}
-                placeholder={field.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
-                value={form[field]}
-                onChange={handleChange}
-                rows={3}
-              />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-10 px-2">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10">
+        {/* Form Card */}
+        <div className="flex-1 w-full lg:w-1/2">
+          <div className="bg-white rounded-3xl shadow-lg border border-blue-100 px-8 py-10">
+            <h1 className="font-extrabold text-2xl mb-5 text-blue-800">
+              Add IAS/IPS Officer
+            </h1>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              {fields.map(field =>
+                textareaFields.includes(field) ? (
+                  <textarea
+                    key={field}
+                    className="border border-gray-300 p-2 rounded-xl mb-2 focus:outline-blue-400 transition"
+                    name={field}
+                    placeholder={field.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
+                    value={form[field]}
+                    onChange={handleChange}
+                    rows={3}
+                  />
+                ) : (
+                  <input
+                    key={field}
+                    className="border border-gray-300 p-2 rounded-xl mb-2 focus:outline-blue-400 transition"
+                    name={field}
+                    placeholder={field.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
+                    value={form[field]}
+                    onChange={handleChange}
+                  />
+                )
+              )}
+              <button
+                disabled={submitting}
+                className="bg-blue-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-xl mt-3 shadow transition"
+                type="submit"
+              >
+                {submitting ? "Adding..." : "Add Officer"}
+              </button>
+              {error && <p className="text-red-500 mt-2">{error}</p>}
+            </form>
+          </div>
+        </div>
+
+        {/* Officers List Card */}
+        <div className="flex-1 w-full lg:w-1/2">
+          <div className="bg-white rounded-3xl shadow-lg border border-purple-100 px-8 py-10">
+            <h2 className="font-extrabold text-xl mb-4 text-purple-700">All Officers</h2>
+            {items.length === 0 ? (
+              <div className="text-gray-500 italic">No officers yet.</div>
             ) : (
-              <input
-                key={field}
-                className="border border-gray-300 p-2 rounded mb-4"
-                name={field}
-                placeholder={field.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase())}
-                value={form[field]}
-                onChange={handleChange}
-              />
-            )
-          )}
-          <button
-            disabled={submitting}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            {submitting ? "Adding..." : "Add Item"}
-          </button>
-          {error && <p className="text-red-500">{error}</p>}
-        </form>
+              <ul>
+                {items.map(item => (
+                  <li className="py-2 border-b border-blue-50 last:border-b-0" key={item._id}>
+                    <Link
+                      href={`/profile/${item._id}`}
+                      className="text-blue-700 font-semibold hover:underline hover:text-purple-700 transition"
+                    >
+                      {item.name}
+                    </Link>
+                    <span className="ml-2 text-gray-500 text-xs">
+                      {item.service?.toUpperCase() || ""} {item.batch ? `| Batch: ${item.batch}` : ""}
+                      {item.rank ? ` | Rank: ${item.rank}` : ""}
+                    </span>
+                    <div className="text-gray-600 text-xs">{item.description}</div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
       </div>
-      <ul className='flex-1'>
-        {items.map(item => (
-          <li className='py-2' key={item._id}>
-            <Link href={`/profile/${item._id}`} className='text-blue-500 hover:underline'>
-              <span className='font-semibold'>{item.name}</span> - {item.service?.toUpperCase() || ''} | Batch: {item.batch} | Rank: {item.rank} | {item.description}
-            </Link>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

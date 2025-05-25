@@ -2,27 +2,65 @@ import Search from "./components/Search";
 
 export default function Home() {
   return (
-    <div className="flex flex-col max-w-4xl mx-auto p-6">
-      <h3 className="font-bold">IAS (Indian Administrative Service) is one of the most prestigious and sought-after careers in India. It is a dream for many aspirants who wish to serve the nation and make a difference in society. The IAS exam, conducted by the Union Public Service Commission (UPSC), is known for its rigorous selection process and high standards.</h3>
-      <div className="h-96">
-      <h2 className="text-2xl font-semibold mt-8 mb-4">
-        Know Successful IAS Officer&apos;s strategy, optional subjects, numbers and preparation tips
-      </h2>
-       <Search />
-       </div>
-      <div className="flex flex-col lg:flex-row my-4 gap-2">
-      <div className="mt-4 text-sm">
-        The IAS exam is not just a test of knowledge, but also of character, leadership, and decision-making skills. It requires candidates to have a deep understanding of various subjects, including history, geography, polity, economy, and current affairs. The exam consists of three stages: the Preliminary exam, the Main exam, and the Personality Test (Interview).
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <div className="max-w-4xl mx-auto p-6">
+        {/* HERO SECTION */}
+        <section className="mb-8">
+          <div className="bg-white rounded-2xl shadow-lg p-8 border border-blue-100">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-4 text-center">
+              Discover the Journey of India&apos;s Top IAS Officers
+            </h1>
+            <p className="text-gray-700 text-lg text-center">
+              IAS (Indian Administrative Service) is one of the most prestigious and sought-after careers in India. 
+              <br />
+              A dream for many aspirants who wish to serve the nation and make a difference in society.
+            </p>
+          </div>
+        </section>
+
+        {/* SEARCH SECTION */}
+        <section className="flex flex-col items-center justify-center my-12">
+          <div className="bg-gradient-to-r from-blue-100 via-white to-purple-100 p-6 rounded-xl shadow flex flex-col items-center w-full">
+            <h2 className="text-xl md:text-2xl font-semibold mb-3 text-purple-800 text-center">
+              Know Successful IAS Officer&apos;s Strategy, Optional Subjects, Numbers and Preparation Tips
+            </h2>
+            <div className="w-full max-w-xl">
+              <Search />
+            </div>
+          </div>
+        </section>
+
+        {/* INFO CARDS */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+          <div className="bg-white rounded-xl shadow p-6 flex flex-col items-start border border-purple-100">
+            <h3 className="text-lg font-semibold text-blue-700 mb-2">A Test Beyond Knowledge</h3>
+            <p className="text-gray-600 text-sm">
+              The IAS exam is not just a test of knowledge, but also of character, leadership, and decision-making skills.
+              It requires a deep understanding of history, geography, polity, economy, and current affairs.
+            </p>
+          </div>
+          <div className="bg-white rounded-xl shadow p-6 flex flex-col items-start border border-purple-100">
+            <h3 className="text-lg font-semibold text-blue-700 mb-2">Exam Structure</h3>
+            <ul className="list-disc ml-4 text-gray-600 text-sm">
+              <li>
+                <span className="font-medium text-blue-600">Preliminary:</span> 2 papers (General Studies I &amp; II)
+              </li>
+              <li>
+                <span className="font-medium text-blue-600">Main:</span> 9 papers (Essay, General Studies, Optional Subjects)
+              </li>
+              <li>
+                <span className="font-medium text-blue-600">Interview:</span> Personality Test
+              </li>
+            </ul>
+          </div>
+          <div className="bg-white rounded-xl shadow p-6 flex flex-col items-start border border-purple-100">
+            <h3 className="text-lg font-semibold text-blue-700 mb-2">Success Requires Perseverance</h3>
+            <p className="text-gray-600 text-sm">
+              With thousands of aspirants and a low success rate, dedication and right preparation are key. Use modern resources and expert strategies to achieve your IAS dream.
+            </p>
+          </div>
+        </section>
       </div>
-      <div className="mt-2 text-sm">
-        The Preliminary exam is an objective type test that consists of two papers: General Studies Paper I and General Studies Paper II (CSAT). Candidates who qualify the Preliminary exam are eligible to appear for the Main exam, which is a written examination consisting of nine papers, including essay writing, general studies, and optional subjects. Finally, candidates who clear the Main exam are called for the Personality Test, where their personality, communication skills, and overall suitability for the IAS are assessed.
-      </div>
-      <div className="mt-2 text-sm">
-        The IAS exam is known for its low success rate, with thousands of candidates competing for a limited number of vacancies. However, with the right preparation, dedication, and perseverance, aspirants can achieve their dream of becoming an IAS officer. Many coaching institutes and online platforms offer guidance and resources to help candidates prepare effectively for the exam.
-      </div>
-      </div>
-      
-     
-    </div>
+    </main>
   );
 }
