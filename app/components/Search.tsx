@@ -20,7 +20,6 @@ const Search = () => {
         setOfficers(data.data || []);
         setError("");
       } catch (err) {
-        console.error("Error fetching officers:", err);
         setError("Unable to fetch officers. Please try again.");
       } finally {
         setLoading(false);
@@ -35,11 +34,11 @@ const Search = () => {
   }, [searchTerm]);
 
   return (
-    <div className="rounded-2xl shadow-md px-6 py-6 mb-2 w-full">
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-blue-600">
-          {/* Search Icon (Heroicons/Feather) */}
-          <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+    <div className="bg-white rounded-2xl shadow-md px-6 py-6 mb-2 w-full">
+      <div className="relative mb-4">
+        {/* Search Icon Inside Input */}
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-600 pointer-events-none">
+          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8" />
             <path d="M21 21l-3.5-3.5" />
           </svg>
@@ -49,7 +48,7 @@ const Search = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search IAS Officer by Name, Service, Batch, Rank…"
-          className="flex-1 border border-gray-200 rounded-xl p-3 text-lg shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-100 outline-none transition"
+          className="w-full border border-gray-200 rounded-xl p-3 pl-10 text-lg shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-100 outline-none transition"
         />
       </div>
       {loading && (
