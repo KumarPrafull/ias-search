@@ -13,6 +13,7 @@ type Officer = {
 };
 
 export default async function ToppersPage() {
+    const isAdmin = false; // Replace with your actual admin check logic
     // You might want to add a `?sort=rank` or similar param on your API if needed
     const base =
         process.env.NEXT_PUBLIC_SITE_URL ||
@@ -41,9 +42,9 @@ export default async function ToppersPage() {
                             Explore details of successful toppers: Batch, Optional, Home State, Service.
                         </p>
                     </div>
-                    <Link href="/profile/create" className="mt-3 md:mt-0 bg-blue-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-xl shadow transition">
+                    {isAdmin && <Link href="/profile/create" className="mt-3 md:mt-0 bg-blue-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-xl shadow transition">
                         Add Officer
-                    </Link>
+                    </Link>}
                 </div>
                 <div className="bg-white rounded-3xl shadow-lg border border-blue-100 px-6 py-6">
                     {toppers.length === 0 ? (

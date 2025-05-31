@@ -96,6 +96,7 @@ type Params = Promise<{ slug: string }>;
 export default async function ProfilePage({ params }: { params: Params }) {
   const { slug } = await params;
   const id = slug.split("-").pop(); // Extract the ID from the slug
+  const isAdmin = false; // Replace with actual auth check logic
 
   const base =
     process.env.NEXT_PUBLIC_SITE_URL ||
@@ -165,12 +166,12 @@ export default async function ProfilePage({ params }: { params: Params }) {
           </div>
         </div>
         <div className="flex gap-4">
-          <Link
+          {isAdmin && <Link
             href={`/profile/${data._id}/edit`}
             className="bg-blue-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-xl shadow transition"
           >
             Edit
-          </Link>
+          </Link>}
           {data.article_url && (
             <a
               href={data.article_url}
