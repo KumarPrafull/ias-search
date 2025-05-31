@@ -36,7 +36,7 @@ const Search = () => {
   }, [searchTerm]);
 
   return (
-    <div className="bg-white rounded-2xl shadow-md px-6 py-6 mb-2 w-full">
+    <div className="bg-white rounded-2xl px-6 py-6 mb-2 w-full"> 
       <div className="relative mb-4">
         {/* Search Icon Inside Input */}
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-600 pointer-events-none">
