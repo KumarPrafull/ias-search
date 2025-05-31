@@ -34,6 +34,7 @@ export default async function OfficersPage() {
       officers = data.data || [];
     }
   } catch (error) {
+    console.error("Error fetching officers:", error);
     // Optionally handle error
   }
 
