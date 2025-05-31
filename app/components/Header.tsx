@@ -25,6 +25,14 @@ const Header = () => {
             </li>
             <li>
               <Link
+                href="/officers/ias"
+                className="text-blue-700 font-medium hover:text-purple-700 hover:underline transition"
+              >
+                Officers
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/toppers"
                 className="bg-blue-600 text-white px-4 py-1.5 rounded-xl font-semibold shadow hover:bg-purple-600 transition"
               >

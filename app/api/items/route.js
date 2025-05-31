@@ -2,19 +2,26 @@ import { NextResponse } from 'next/server'
 import dbConnect from '../../lib/mongodb'
 import Item from '../../models/item'
 
-// No need for export const dynamic = 'force-static' here
-
 export async function GET(request) {
   await dbConnect();
-  // Use Next.js native nextUrl to safely extract query parameters
   const { searchParams } = request.nextUrl;
-  console.log("url searchParams:", searchParams);
   const id = searchParams.get('id');
+  const service = searchParams.get('service'); // Get service from query
 
-  console.log('GET request received with id:', id);
+  // Debug logs
+  console.log("url searchParams:", searchParams);
+  console.log('GET request received with id:', id, 'service:', service);
+
+  // Build query object
+  const query = {};
+  if (id) query._id = id;
+  if (service) {
+    // Case-insensitive, exact match for service
+    query.service = { $regex: new RegExp(`^${service}$`, "i") };
+  }
 
   try {
-    const items = await Item.find(id ? { _id: id } : {});
+    const items = await Item.find(query);
     return NextResponse.json({ success: true, data: items }, { status: 200 });
   } catch (error) {
     console.error('GET error:', error);
