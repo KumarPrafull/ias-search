@@ -31,7 +31,7 @@ export default function RootLayout({
         <Header />
         {children}
         <footer className="text-center text-sm text-gray-500 mt-8">
-          © {new Date().getFullYear()} IAS - Indian Administrative Service
+          © {new Date().getFullYear()} IAS
         </footer>
       </body>
     </html>
