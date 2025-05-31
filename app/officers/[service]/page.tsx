@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+export const dynamic = "force-dynamic";
 // Officer Type
 type Officer = {
   _id: string;
@@ -34,11 +34,11 @@ export default async function OfficersByServicePage({ params }: { params: Params
   console.log("Current Service:", currentService);
 
   // Fetch officers for the current service
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
-    "http://localhost:3000";
-  const apiUrl = `${base}/api/items?service=${currentService.key}`;
+  // const base =
+  //   process.env.NEXT_PUBLIC_SITE_URL ||
+  //   (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
+  //   "http://localhost:3000";
+  const apiUrl = `/api/items?service=${currentService.key}`;
 
   let officers: Officer[] = [];
   try {
