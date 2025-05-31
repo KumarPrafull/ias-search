@@ -49,7 +49,7 @@ const Search = () => {
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search IAS Officer by Name"
+          placeholder="Search Officer by Name"
           className="w-full border border-gray-200 rounded-xl p-3 pl-10 text-lg shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-100 outline-none transition"
         />
       </div>

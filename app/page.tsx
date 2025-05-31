@@ -8,7 +8,7 @@ export default function Home() {
         <section className="flex flex-col items-center justify-center my-12">
           <div className="bg-white rounded-2xl shadow-lg p-8 border border-blue-100 flex flex-col items-center w-full">
             <h1 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-4 text-center">
-              Discover the Journey of India&apos;s Top IAS Officers
+              Discover the Journey of India&apos;s Top Civil Servants
             </h1>
             <div className="w-full max-w-xl">
               <Search />
