@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createSlug } from "../utils";
 import { Officer } from "../profile/create/page";
 
-const OfficersList = ({items, showDescription}: {items: Officer[], showDescription: Boolean}) => {
+const OfficersList = ({items, showDescription}: {items: Officer[], showDescription: boolean}) => {
   return (
         <div className="flex-1 w-full lg:w-1/2">
           <div className="bg-white rounded-3xl shadow-lg border border-purple-100 px-8 py-10">

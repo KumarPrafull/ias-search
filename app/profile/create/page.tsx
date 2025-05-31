@@ -1,7 +1,5 @@
 'use client';
 import OfficersList from '@/app/components/OfficersList';
-import { createSlug } from '@/app/utils';
-import Link from 'next/link';
 import { useState, useCallback, useEffect } from 'react';
 
 export type Officer = {
