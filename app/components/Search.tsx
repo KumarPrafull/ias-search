@@ -93,9 +93,9 @@ const Search = () => {
                     </span>
                   )}
                 </span>
-                <span className="block text-gray-600 text-sm ml-1">
+                {/* <span className="block text-gray-600 text-sm ml-1">
                   {officer.description}
-                </span>
+                </span> */}
               </Link>
             </li>
           ))}

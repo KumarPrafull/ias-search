@@ -1,5 +1,38 @@
-import { createSlug } from "@/app/utils";
 import Link from "next/link";
+import { Metadata } from "next";
+import { createSlug } from "@/app/utils";
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params;
+  const id = slug.split("-").pop();
+
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
+    "http://localhost:3000";
+
+  const apiUrl = `${base}/api/items?id=${id}`;
+  let officerName = "IAS Officer";
+  let officerService = "IAS";
+
+  try {
+    const response = await fetch(apiUrl, { cache: "force-cache" });
+    if (response.ok) {
+      const apiData = await response.json();
+      const data = apiData.data?.[0];
+      if (data?.name) officerName = data.name;
+      if (data?.service) officerService = data.service;
+    }
+  } catch (e) {
+    console.error("Error fetching officer data for metadata:", e);
+    // Ignore error, fall back to default
+  }
+
+  return {
+    title: `${officerName} - ${officerService} Profile`,
+    description: `Know about ${officerName}, their UPSC rank, batch, optional subject, and preparation journey.`,
+  };
+}
 
 type Officer = {
   _id: string;
