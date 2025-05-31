@@ -220,7 +220,7 @@ function InfoGrid({ data, fields }: { data: Officer; fields: (keyof Officer)[] }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {fields
-        .filter(f => data[f] && String(data[f]).trim() !== "")
+        .filter(f => data[f] && String(data[f]).trim() !== "" && String(data[f]).trim() !== "Not Public")
         .map(f => (
           <div key={f} className="flex flex-col">
             <span className="font-semibold text-gray-600">
