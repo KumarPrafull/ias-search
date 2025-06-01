@@ -15,14 +15,14 @@ const Header = () => {
         {/* Navigation */}
         <nav>
           <ul className="flex gap-4 items-center">
-            <li>
+            {/* <li>
               <Link
                 href="/"
                 className="text-blue-700 font-medium hover:text-purple-700 hover:underline transition"
               >
                 Home
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/officers/ias"
